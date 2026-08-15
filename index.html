@@ -1,0 +1,2518 @@
+<!doctype html>
+<html lang="en" data-theme="light">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Shiv Shankar Yadav — Senior Web &amp; Graphic Designer</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Fraunces:ital,opsz,wght@0,9..144,300;0,9..144,500;0,9..144,600;0,9..144,700;1,9..144,500&family=Inter:wght@400;500;600;700&family=IBM+Plex+Mono:wght@400;500;600&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      /* PRIMARY THEME COLOR TOKENS */
+      :root[data-theme="light"] {
+        --paper: #fbfaf7;
+        --paper-dim: #f2efe9;
+        --panel: #ffffff;
+        --panel-2: #f5f3ec;
+        --panel-line: #e3ded5;
+        --ink: #11141a;
+        --ink-soft: #4a5160;
+        --gold: #b38b16;
+        --gold-soft: rgba(179, 139, 22, 0.14);
+        --teal: #247567;
+        --line: #e5e0d6;
+        --muted: #6b7280;
+        --card-bg: #ffffff;
+        --nav-bg: rgba(251, 250, 247, 0.92);
+        --top-bar-bg: #11141a;
+      }
+
+      :root[data-theme="dark"] {
+        --paper: #0a0c10;
+        --paper-dim: #11141c;
+        --panel: #0e1118;
+        --panel-2: #161a24;
+        --panel-line: #222736;
+        --ink: #f3f5f8;
+        --ink-soft: #a2a8b8;
+        --gold: #d4af37;
+        --gold-soft: rgba(212, 175, 55, 0.15);
+        --teal: #36a390;
+        --line: #202637;
+        --muted: #798196;
+        --card-bg: #141824;
+        --nav-bg: rgba(10, 12, 16, 0.88);
+        --top-bar-bg: #06080c;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+        background: var(--paper);
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: "Inter", sans-serif;
+        font-size: 16px;
+        line-height: 1.6;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+        transition:
+          background-color 0.3s ease,
+          color 0.3s ease;
+      }
+      h1,
+      h2,
+      h3,
+      h4 {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        line-height: 1.15;
+        margin: 0;
+        letter-spacing: -0.015em;
+        color: var(--ink);
+      }
+      a {
+        color: inherit;
+        text-decoration: none;
+      }
+      img {
+        max-width: 100%;
+        display: block;
+        -webkit-user-drag: none;
+        user-select: none;
+      }
+      .wrap {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 32px;
+      }
+      .eyebrow {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--gold);
+        font-weight: 600;
+      }
+
+      /* SCROLL PROGRESS BAR */
+      #scrollbar {
+        position: fixed;
+        top: 0;
+        left: 0;
+        height: 3px;
+        background: linear-gradient(90deg, var(--gold), var(--teal));
+        width: 0%;
+        z-index: 1002;
+        transition: width 0.1s linear;
+      }
+
+      /* GRAIN TEXTURE OVERLAY */
+      .grain {
+        position: fixed;
+        inset: 0;
+        z-index: -2;
+        opacity: 0.035;
+        pointer-events: none;
+        background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)'/%3E%3C/svg%3E");
+      }
+
+      /* SEAMLESS INFINITE RUNNING MARQUEE SYSTEM */
+      .top-mono-bar {
+        background: var(--top-bar-bg);
+        border-bottom: 1px solid var(--panel-line);
+        padding: 10px 0;
+        overflow: hidden;
+        display: flex;
+        width: 100%;
+        position: relative;
+        z-index: 101;
+      }
+      .marquee-wrap {
+        overflow: hidden;
+        background: var(--panel);
+        border-top: 1px solid var(--panel-line);
+        border-bottom: 1px solid var(--panel-line);
+        padding: 14px 0;
+        display: flex;
+        width: 100%;
+        position: relative;
+        z-index: 1;
+      }
+      .marquee-track {
+        display: flex;
+        flex-shrink: 0;
+        width: max-content;
+        animation: marquee 28s linear infinite;
+        will-change: transform;
+      }
+      .marquee-track.rev {
+        animation: marqueeRev 32s linear infinite;
+      }
+      .marquee-group {
+        display: flex;
+        align-items: center;
+        flex-shrink: 0;
+      }
+      .marquee-track span {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        padding: 0 24px;
+        font-family: "Fraunces", serif;
+        font-style: italic;
+        font-weight: 500;
+        font-size: clamp(15px, 1.8vw, 20px);
+        color: var(--ink);
+        white-space: nowrap;
+      }
+      .marquee-track span i {
+        width: 6px;
+        height: 6px;
+        background: var(--gold);
+        border-radius: 50%;
+        font-style: normal;
+        flex-shrink: 0;
+      }
+      .marquee-track.mono span {
+        font-family: "IBM Plex Mono", monospace;
+        font-style: normal;
+        font-weight: 600;
+        font-size: clamp(11.5px, 1.4vw, 13.5px);
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #9ba0ad;
+      }
+      .marquee-track.mono span i {
+        background: var(--teal);
+      }
+      @keyframes marquee {
+        0% {
+          transform: translate3d(0, 0, 0);
+        }
+        100% {
+          transform: translate3d(-50%, 0, 0);
+        }
+      }
+      @keyframes marqueeRev {
+        0% {
+          transform: translate3d(-50%, 0, 0);
+        }
+        100% {
+          transform: translate3d(0, 0, 0);
+        }
+      }
+
+      /* NAVIGATION */
+      header.site-nav {
+        position: sticky;
+        top: 0;
+        z-index: 100;
+        background: var(--nav-bg);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--panel-line);
+      }
+      .nav-inner {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 16px 32px;
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+      }
+      .nav-mark {
+        font-family: "Fraunces", serif;
+        font-weight: 600;
+        font-size: 20px;
+        color: var(--ink);
+      }
+      .nav-mark span {
+        color: var(--gold);
+      }
+      .nav-links {
+        display: flex;
+        gap: 30px;
+        font-size: 14.5px;
+        font-weight: 500;
+      }
+      .nav-links a {
+        color: var(--ink-soft);
+        transition: color 0.2s;
+        position: relative;
+      }
+      .nav-links a:hover {
+        color: var(--ink);
+      }
+      .nav-actions {
+        display: flex;
+        align-items: center;
+        gap: 14px;
+      }
+      .theme-btn {
+        background: var(--panel-2);
+        border: 1px solid var(--panel-line);
+        color: var(--ink);
+        padding: 8px 14px;
+        border-radius: 100px;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        cursor: pointer;
+        display: flex;
+        align-items: center;
+        gap: 6px;
+        transition: 0.25s;
+      }
+      .theme-btn:hover {
+        border-color: var(--gold);
+      }
+      .nav-cta {
+        font-size: 13.5px;
+        font-weight: 600;
+        padding: 9px 20px;
+        border: 1px solid var(--gold);
+        color: var(--gold);
+        border-radius: 100px;
+        font-family: "IBM Plex Mono", monospace;
+        letter-spacing: 0.03em;
+        transition: 0.25s;
+        background: var(--gold-soft);
+      }
+      .nav-cta:hover {
+        background: var(--gold);
+        color: #ffffff;
+      }
+      .nav-toggle {
+        display: none;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 4px;
+      }
+      .nav-toggle span {
+        display: block;
+        width: 22px;
+        height: 2px;
+        background: var(--ink);
+        margin: 5px 0;
+      }
+      .nav-drawer {
+        display: none;
+        flex-direction: column;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        background: var(--paper);
+        padding: 22px 32px 28px;
+        border-bottom: 1px solid var(--panel-line);
+        gap: 16px;
+      }
+      .nav-drawer.open {
+        display: flex;
+      }
+
+      /* HERO SECTION */
+      .hero {
+        padding: 60px 0 54px;
+        position: relative;
+        overflow: hidden;
+      }
+      #heroCanvas {
+        position: absolute;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+      }
+      .hero-grid {
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 40px;
+        align-items: center;
+        position: relative;
+        z-index: 1;
+      }
+      .hero h1 {
+        font-size: clamp(34px, 5vw, 56px);
+        margin: 18px 0 22px;
+      }
+      .hero h1 em {
+        font-style: italic;
+        font-weight: 500;
+        color: var(--teal);
+      }
+      .hero p.lede {
+        font-size: clamp(16px, 2vw, 18.5px);
+        color: var(--ink-soft);
+        max-width: 520px;
+        margin-bottom: 30px;
+      }
+      .hero-stats {
+        display: flex;
+        gap: 34px;
+        margin-top: 36px;
+        flex-wrap: wrap;
+      }
+      .stat b {
+        font-family: "Fraunces", serif;
+        font-size: clamp(26px, 4vw, 32px);
+        font-weight: 600;
+        display: block;
+        color: var(--ink);
+      }
+      .stat span {
+        font-size: 12.5px;
+        color: var(--muted);
+      }
+      .hero-cta-row {
+        display: flex;
+        gap: 14px;
+        flex-wrap: wrap;
+      }
+      .btn-primary {
+        background: var(--gold);
+        color: #ffffff;
+        padding: 13px 26px;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 14px;
+        display: inline-block;
+        transition:
+          transform 0.3s cubic-bezier(0.16, 1, 0.3, 1),
+          box-shadow 0.3s;
+      }
+      .btn-primary:hover {
+        transform: translateY(-3px);
+        box-shadow: 0 14px 28px -10px rgba(179, 139, 22, 0.4);
+      }
+      .btn-ghost {
+        border: 1px solid var(--panel-line);
+        background: var(--panel-2);
+        color: var(--ink);
+        padding: 13px 26px;
+        border-radius: 100px;
+        font-weight: 600;
+        font-size: 14px;
+        display: inline-block;
+        transition: 0.25s;
+      }
+      .btn-ghost:hover {
+        border-color: var(--gold);
+      }
+
+      /* HERO VISUAL PHONE */
+      .hero-visual {
+        position: relative;
+        height: 520px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+      .float-tag {
+        position: absolute;
+        background: var(--panel-2);
+        color: var(--ink);
+        border-radius: 12px;
+        padding: 10px 16px;
+        box-shadow: 0 16px 32px -12px rgba(0, 0, 0, 0.15);
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11.5px;
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        z-index: 3;
+        border: 1px solid var(--panel-line);
+      }
+      .float-tag i {
+        width: 7px;
+        height: 7px;
+        border-radius: 50%;
+        background: var(--teal);
+        display: block;
+      }
+      .ft1 {
+        top: 6%;
+        left: -2%;
+        animation: floaty 6s ease-in-out infinite 0.4s;
+      }
+      .ft2 {
+        bottom: 12%;
+        right: -4%;
+        animation: floaty 6.5s ease-in-out infinite 0.9s;
+      }
+      .phone {
+        position: relative;
+        width: 250px;
+        height: 500px;
+        background: #11141a;
+        border: 4px solid var(--panel-line);
+        border-radius: 40px;
+        padding: 10px;
+        box-shadow: 0 40px 70px -20px rgba(0, 0, 0, 0.25);
+        z-index: 2;
+        animation: floaty 5.5s ease-in-out infinite;
+      }
+      @keyframes floaty {
+        0%,
+        100% {
+          transform: translateY(0) rotate(-1deg);
+        }
+        50% {
+          transform: translateY(-12px) rotate(1deg);
+        }
+      }
+      .phone::before {
+        content: "";
+        position: absolute;
+        top: 12px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 70px;
+        height: 16px;
+        background: #11141a;
+        border-radius: 0 0 14px 14px;
+        z-index: 3;
+      }
+      .phone-screen {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        border-radius: 28px;
+        overflow: hidden;
+        background: #ffffff;
+      }
+      .phone-slide {
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        transition: opacity 0.8s ease;
+      }
+      .phone-slide.active {
+        opacity: 1;
+      }
+      .phone-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+      }
+      .phone-dots {
+        position: absolute;
+        bottom: 18px;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        z-index: 4;
+      }
+      .phone-dots span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: rgba(255, 255, 255, 0.4);
+        transition: 0.3s;
+      }
+      .phone-dots span.active {
+        background: var(--gold);
+        width: 16px;
+        border-radius: 4px;
+      }
+
+      /* TIMELINE */
+      .timeline {
+        background: var(--panel);
+        padding: 60px 0;
+        position: relative;
+        border-bottom: 1px solid var(--panel-line);
+      }
+      .timeline-dotgrid {
+        position: absolute;
+        inset: 0;
+        opacity: 0.25;
+        background-image: radial-gradient(var(--gold) 1px, transparent 1px);
+        background-size: 24px 24px;
+      }
+      .timeline-inner {
+        position: relative;
+      }
+      .timeline-line {
+        position: absolute;
+        top: 17px;
+        left: 0;
+        right: 0;
+        height: 1px;
+        background: var(--panel-line);
+      }
+      .timeline-progress {
+        position: absolute;
+        top: 17px;
+        left: 0;
+        height: 1px;
+        background: linear-gradient(90deg, var(--gold), var(--teal));
+        width: 0%;
+        transition: width 1.6s ease;
+      }
+      .timeline-row {
+        display: flex;
+        justify-content: space-between;
+        position: relative;
+        flex-wrap: wrap;
+        gap: 20px;
+      }
+      .tl-node {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 12px;
+        width: 120px;
+      }
+      .tl-num {
+        width: 34px;
+        height: 34px;
+        border-radius: 50%;
+        background: var(--panel-2);
+        border: 1.5px solid var(--gold);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        color: var(--gold);
+        position: relative;
+        z-index: 2;
+        font-weight: 600;
+      }
+      .tl-node b {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12.5px;
+        letter-spacing: 0.03em;
+        color: var(--ink);
+        text-align: center;
+        font-weight: 500;
+      }
+
+      /* SECTIONS */
+      section {
+        padding: 90px 0;
+        border-bottom: 1px solid var(--panel-line);
+      }
+      .sec-head {
+        max-width: 680px;
+        margin-bottom: 50px;
+      }
+      .sec-head h2 {
+        font-size: clamp(28px, 4vw, 42px);
+        margin-top: 12px;
+      }
+      .sec-head p {
+        color: var(--ink-soft);
+        font-size: 16px;
+        margin-top: 12px;
+      }
+      .on-dark {
+        background: var(--panel);
+        position: relative;
+        overflow: hidden;
+      }
+      .web-glow {
+        position: absolute;
+        top: -140px;
+        right: -100px;
+        width: 480px;
+        height: 480px;
+        border-radius: 50%;
+        background: radial-gradient(circle, var(--gold-soft), transparent 65%);
+        filter: blur(20px);
+        pointer-events: none;
+      }
+      .gfx-halo {
+        position: absolute;
+        top: -60px;
+        left: -40px;
+        width: 320px;
+        height: 320px;
+        pointer-events: none;
+        background: conic-gradient(
+          from 0deg,
+          rgba(179, 139, 22, 0.2),
+          transparent 55%,
+          rgba(36, 117, 103, 0.15),
+          transparent 90%
+        );
+        filter: blur(34px);
+        animation: spinHalo 26s linear infinite;
+      }
+      @keyframes spinHalo {
+        to {
+          transform: rotate(360deg);
+        }
+      }
+
+      /* CASE STUDIES */
+      .case {
+        display: grid;
+        grid-template-columns: 0.85fr 1.15fr;
+        gap: 48px;
+        padding: 56px 0;
+        border-top: 1px solid var(--panel-line);
+        align-items: start;
+      }
+      .case:first-of-type {
+        border-top: none;
+      }
+      .case-tag {
+        display: inline-block;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        background: var(--panel-2);
+        padding: 4px 12px;
+        border-radius: 100px;
+        color: var(--teal);
+        border: 1px solid var(--panel-line);
+        font-weight: 600;
+        margin-bottom: 14px;
+      }
+      .case h3 {
+        font-size: clamp(22px, 3.2vw, 30px);
+        margin-bottom: 12px;
+      }
+      .case p.desc {
+        color: var(--ink-soft);
+        font-size: 15px;
+        margin-bottom: 18px;
+      }
+      .case-list {
+        list-style: none;
+        padding: 0;
+        margin: 0 0 22px;
+      }
+      .case-list li {
+        font-size: 14px;
+        color: var(--ink-soft);
+        padding-left: 18px;
+        position: relative;
+        margin-bottom: 9px;
+      }
+      .case-list li::before {
+        content: "";
+        position: absolute;
+        left: 0;
+        top: 7px;
+        width: 5px;
+        height: 5px;
+        background: var(--gold);
+        border-radius: 50%;
+      }
+      .chip-row {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .chip {
+        font-size: 11.5px;
+        font-family: "IBM Plex Mono", monospace;
+        border: 1px solid var(--panel-line);
+        padding: 4px 11px;
+        border-radius: 100px;
+        color: var(--ink-soft);
+        background: var(--panel-2);
+      }
+
+      /* CAROUSEL CONTROLLER */
+      .carousel-header-bar {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        margin-bottom: 14px;
+      }
+      .carousel-controls {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+      }
+      .carousel-arrow {
+        width: 36px;
+        height: 36px;
+        border-radius: 50%;
+        border: 1px solid var(--panel-line);
+        background: var(--panel-2);
+        color: var(--ink);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        font-size: 18px;
+        transition: 0.25s;
+        cursor: pointer;
+        user-select: none;
+      }
+      .carousel-arrow:hover {
+        background: var(--gold);
+        color: #ffffff;
+        border-color: var(--gold);
+      }
+      .carousel {
+        position: relative;
+      }
+      .carousel-viewport {
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        touch-action: pan-x;
+        cursor: default;
+      }
+      .carousel-viewport::-webkit-scrollbar {
+        display: none;
+      }
+      .carousel-track {
+        display: flex;
+        gap: 16px;
+      }
+      .carousel-slide {
+        flex: 0 0 calc(33.333% - 11px);
+        height: 460px;
+        scroll-snap-align: start;
+        border-radius: 16px;
+        overflow: hidden;
+        box-shadow: 0 14px 28px -15px rgba(0, 0, 0, 0.15);
+        background: var(--card-bg);
+        border: 1px solid var(--panel-line);
+      }
+      .carousel-slide img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        display: block;
+        cursor: pointer;
+        transition: transform 0.4s ease;
+      }
+      .carousel-slide:hover img {
+        transform: scale(1.03);
+      }
+      .carousel-dots {
+        display: flex;
+        justify-content: center;
+        gap: 6px;
+        margin-top: 16px;
+      }
+      .carousel-dots span {
+        width: 6px;
+        height: 6px;
+        border-radius: 50%;
+        background: var(--panel-line);
+        transition: 0.3s;
+        cursor: pointer;
+      }
+      .carousel-dots span.active {
+        background: var(--gold);
+        width: 18px;
+        border-radius: 4px;
+      }
+
+      /* COMPANION SPLIT */
+      .companion-split {
+        grid-column: 1 / -1;
+        margin-top: 16px;
+        padding: 28px;
+        border-radius: 18px;
+        background: var(--panel-2);
+        border: 1px solid var(--panel-line);
+        display: grid;
+        grid-template-columns: 1.1fr 0.9fr;
+        gap: 28px;
+        align-items: center;
+      }
+      .companion-content h4 {
+        font-size: 20px;
+        margin: 8px 0 10px;
+      }
+      .companion-content p {
+        color: var(--ink-soft);
+        font-size: 14.5px;
+        margin-bottom: 14px;
+      }
+      .companion-img-box {
+        width: 100%;
+        height: 220px;
+        border-radius: 12px;
+        border: 1px solid var(--panel-line);
+        box-shadow: 0 14px 28px -12px rgba(0, 0, 0, 0.15);
+        overflow: hidden;
+        background: #11141a;
+        cursor: pointer;
+      }
+      .companion-img-box img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        transition: transform 0.4s ease;
+      }
+      .companion-img-box:hover img {
+        transform: scale(1.03);
+      }
+
+      /* WEB GRIDS */
+      .web-grid {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 24px;
+      }
+      .web-card {
+        border-radius: 16px;
+        overflow: hidden;
+        background: var(--panel-2);
+        border: 1px solid var(--panel-line);
+        transition:
+          transform 0.35s ease,
+          box-shadow 0.35s ease,
+          border-color 0.3s;
+        cursor: pointer;
+      }
+      .web-card:hover {
+        transform: translateY(-6px);
+        box-shadow: 0 20px 40px -18px rgba(0, 0, 0, 0.2);
+        border-color: var(--gold);
+      }
+      .web-thumb {
+        height: 210px;
+        overflow: hidden;
+        background: #11141a;
+      }
+      .web-thumb img {
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: top;
+        transition: transform 0.5s ease;
+      }
+      .web-card:hover .web-thumb img {
+        transform: scale(1.05);
+      }
+      .web-info {
+        padding: 18px 20px;
+      }
+      .web-info h4 {
+        font-size: 18px;
+        margin-bottom: 4px;
+      }
+      .web-info p {
+        font-size: 13.5px;
+        color: var(--ink-soft);
+        margin: 0;
+      }
+
+      /* GRAPHIC DESIGN SECTIONS */
+      .gfx-sub {
+        margin-bottom: 56px;
+      }
+      .gfx-sub-head {
+        margin-bottom: 22px;
+      }
+      .gfx-sub-head h3 {
+        font-size: clamp(20px, 2.8vw, 24px);
+        display: flex;
+        align-items: center;
+        gap: 12px;
+      }
+      .gfx-sub-head h3::after {
+        content: "";
+        flex: 1;
+        height: 1px;
+        background: var(--panel-line);
+      }
+      .gfx-sub-head p {
+        color: var(--ink-soft);
+        font-size: 14px;
+        margin-top: 6px;
+      }
+
+      .logo-grid {
+        display: grid;
+        grid-template-columns: repeat(4, 1fr);
+        gap: 18px;
+      }
+      .logo-tile {
+        background: #ffffff;
+        border-radius: 14px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        border: 1px solid var(--panel-line);
+        cursor: pointer;
+      }
+      .logo-tile:hover {
+        transform: translateY(-5px);
+      }
+      .logo-tile-img {
+        height: 110px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 18px;
+      }
+      .logo-tile-img img {
+        max-height: 52px;
+        max-width: 100%;
+        object-fit: contain;
+      }
+      .logo-tile-cap {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: #11141a;
+        font-weight: 600;
+        text-align: center;
+        padding: 9px 8px;
+        border-top: 1px solid #e2ded5;
+        background: #f2efe9;
+      }
+
+      .flyer-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+        gap: 18px;
+      }
+      .flyer-card {
+        border-radius: 14px;
+        overflow: hidden;
+        transition: transform 0.35s ease;
+        border: 1px solid var(--panel-line);
+        background: var(--panel-2);
+        cursor: pointer;
+      }
+      .flyer-card:hover {
+        transform: translateY(-6px);
+        border-color: var(--gold);
+      }
+      .flyer-card img {
+        width: 100%;
+        height: 220px;
+        object-fit: cover;
+        object-position: top;
+        transition: transform 0.5s ease;
+      }
+      .flyer-card:hover img {
+        transform: scale(1.05);
+      }
+      .flyer-cap {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.05em;
+        text-transform: uppercase;
+        color: var(--ink-soft);
+        padding: 10px 12px;
+        font-weight: 500;
+      }
+
+      .brochure-feature {
+        border-radius: 16px;
+        overflow: hidden;
+        border: 1px solid var(--panel-line);
+        cursor: pointer;
+      }
+      .brochure-feature img {
+        width: 100%;
+        display: block;
+      }
+
+      .card-grid-3 {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: 18px;
+      }
+      .simple-card {
+        border-radius: 14px;
+        overflow: hidden;
+        transition: transform 0.3s ease;
+        background: #fff;
+        border: 1px solid var(--panel-line);
+        cursor: pointer;
+      }
+      .simple-card:hover {
+        transform: translateY(-5px);
+      }
+      .simple-card img {
+        width: 100%;
+        height: 200px;
+        object-fit: cover;
+      }
+
+      /* ABOUT SECTION */
+      .about-grid {
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        gap: 60px;
+        align-items: start;
+      }
+      .about-grid p {
+        color: var(--ink-soft);
+        font-size: 16.5px;
+        margin-bottom: 18px;
+      }
+      .skill-block {
+        margin-bottom: 24px;
+      }
+      .skill-block h4 {
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 12px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--teal);
+        font-weight: 600;
+        margin-bottom: 12px;
+      }
+
+      /* FOOTER */
+      footer {
+        background: var(--top-bar-bg);
+        color: #ffffff;
+        padding: 80px 0 36px;
+        border-top: 1px solid var(--panel-line);
+      }
+      .footer-top {
+        text-align: center;
+        max-width: 660px;
+        margin: 0 auto 46px;
+      }
+      .footer-top h2 {
+        font-size: clamp(30px, 4.6vw, 44px);
+        color: #ffffff;
+      }
+      .footer-top p {
+        color: #aeb3c0;
+        font-size: 16px;
+        margin-top: 14px;
+      }
+      .contact-row {
+        display: grid;
+        grid-template-columns: repeat(5, 1fr);
+        gap: 14px;
+        margin-top: 36px;
+      }
+      .contact-item {
+        background: rgba(255, 255, 255, 0.06);
+        border: 1px solid rgba(255, 255, 255, 0.12);
+        border-radius: 14px;
+        padding: 20px 16px;
+        text-align: center;
+        transition:
+          transform 0.3s ease,
+          border-color 0.3s;
+      }
+      .contact-item:hover {
+        transform: translateY(-5px);
+        border-color: var(--gold);
+      }
+      .contact-item span {
+        display: block;
+        font-family: "IBM Plex Mono", monospace;
+        font-size: 11px;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: #aeb3c0;
+        margin-bottom: 6px;
+        font-weight: 500;
+      }
+      .contact-item a {
+        font-size: 14px;
+        font-weight: 500;
+        color: #ffffff;
+        word-break: break-word;
+      }
+      .footer-bottom {
+        border-top: 1px solid rgba(255, 255, 255, 0.12);
+        margin-top: 60px;
+        padding-top: 24px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 13px;
+        color: #aeb3c0;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      /* LIGHTBOX MODAL */
+      .lightbox {
+        position: fixed;
+        inset: 0;
+        background: rgba(5, 7, 10, 0.95);
+        z-index: 1000;
+        display: none;
+        align-items: center;
+        justify-content: center;
+        padding: 40px 20px;
+      }
+      .lightbox.open {
+        display: flex;
+      }
+      .lightbox img {
+        max-width: 85vw;
+        max-height: 85vh;
+        width: auto;
+        height: auto;
+        border-radius: 10px;
+        box-shadow: 0 30px 80px rgba(0, 0, 0, 0.8);
+        object-fit: contain;
+      }
+      .lightbox-close {
+        position: fixed;
+        top: 24px;
+        right: 32px;
+        color: #fff;
+        font-size: 36px;
+        cursor: pointer;
+        font-family: "Fraunces", serif;
+        line-height: 1;
+        z-index: 1001;
+      }
+
+      /* RESPONSIVE */
+      @media (max-width: 900px) {
+        .hero-grid {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+        .hero-visual {
+          height: auto;
+        }
+        .phone {
+          width: 220px;
+          height: 440px;
+        }
+        .case {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+        .carousel-slide {
+          flex: 0 0 85%;
+          height: 420px;
+        }
+        .companion-split {
+          grid-template-columns: 1fr;
+          padding: 20px;
+        }
+        .web-grid,
+        .logo-grid {
+          grid-template-columns: repeat(2, 1fr);
+        }
+        .card-grid-3 {
+          grid-template-columns: 1fr 1fr;
+        }
+        .about-grid {
+          grid-template-columns: 1fr;
+        }
+        .nav-links,
+        .nav-cta {
+          display: none;
+        }
+        .nav-toggle {
+          display: block;
+        }
+        .timeline-line,
+        .timeline-progress {
+          display: none;
+        }
+        .contact-row {
+          grid-template-columns: repeat(2, 1fr);
+        }
+      }
+
+      @media (max-width: 560px) {
+        .wrap,
+        .nav-inner {
+          padding-left: 20px;
+          padding-right: 20px;
+        }
+        .carousel-slide {
+          flex: 0 0 90%;
+          height: 380px;
+        }
+        .web-grid,
+        .logo-grid,
+        .flyer-grid,
+        .card-grid-3 {
+          grid-template-columns: 1fr;
+        }
+        .contact-row {
+          grid-template-columns: 1fr;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div id="scrollbar"></div>
+    <div class="grain"></div>
+
+    <!-- 1. TOP MONO MARQUEE (ABOVE HEADER) -->
+    <div class="top-mono-bar">
+      <div class="marquee-track mono rev">
+        <div class="marquee-group">
+          <span><i></i>Healthcare</span>
+          <span><i></i>Fintech</span>
+          <span><i></i>E‑Commerce</span>
+          <span><i></i>EdTech</span>
+          <span><i></i>Senior Web &amp; Graphic Designer</span>
+          <span><i></i>Healthcare</span>
+          <span><i></i>Fintech</span>
+          <span><i></i>E‑Commerce</span>
+          <span><i></i>EdTech</span>
+          <span><i></i>Senior Web &amp; Graphic Designer</span>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <span><i></i>Healthcare</span>
+          <span><i></i>Fintech</span>
+          <span><i></i>E‑Commerce</span>
+          <span><i></i>EdTech</span>
+          <span><i></i>Senior Web &amp; Graphic Designer</span>
+          <span><i></i>Healthcare</span>
+          <span><i></i>Fintech</span>
+          <span><i></i>E‑Commerce</span>
+          <span><i></i>EdTech</span>
+          <span><i></i>Senior Web &amp; Graphic Designer</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- 2. SITE NAVIGATION WITH THEME SWITCHER -->
+    <header class="site-nav">
+      <div class="nav-inner">
+        <a class="nav-mark" href="#top">Shiv Shankar<span>.</span></a>
+        <nav class="nav-links">
+          <a href="#work">Product Design</a>
+          <a href="#web">Web Design</a>
+          <a href="#graphic">Graphic Design</a>
+          <a href="#about">About</a>
+        </nav>
+        <div class="nav-actions">
+          <button class="theme-btn" id="themeToggle" title="Switch theme">
+            <span id="themeIcon">🌙</span> <span id="themeText">Dark</span>
+          </button>
+          <a class="nav-cta" href="#contact">Let's talk →</a>
+          <button class="nav-toggle" aria-label="menu" id="navToggle">
+            <span></span><span></span><span></span>
+          </button>
+        </div>
+      </div>
+      <div class="nav-drawer" id="navDrawer">
+        <a href="#work">Product Design</a>
+        <a href="#web">Web Design</a>
+        <a href="#graphic">Graphic Design</a>
+        <a href="#about">About</a>
+        <a href="#contact">Let's talk →</a>
+      </div>
+    </header>
+
+    <div id="top"></div>
+
+    <!-- HERO SECTION -->
+    <section class="hero">
+      <canvas id="heroCanvas"></canvas>
+      <div class="wrap hero-grid">
+        <div>
+          <p class="eyebrow">
+            Senior Web &amp; Graphic Designer · Open to Remote / WFH
+          </p>
+          <h1>
+            I design digital<br />experiences that feel <em>considered.</em>
+          </h1>
+          <p class="lede">
+            10+ years designing responsive websites, mobile app UI, and
+            brand/marketing graphics for healthcare, fintech and e‑commerce
+            clients — from first wireframe to developer handoff.
+          </p>
+          <div class="hero-cta-row">
+            <a class="btn-primary" href="#work">View selected work</a>
+            <a class="btn-ghost" href="#contact">Get in touch</a>
+          </div>
+          <div class="hero-stats">
+            <div class="stat"><b>10+</b><span>Years experience</span></div>
+            <div class="stat"><b>100+</b><span>Projects delivered</span></div>
+            <div class="stat"><b>4</b><span>Key Industries</span></div>
+          </div>
+        </div>
+        <div class="hero-visual">
+          <div class="float-tag ft1"><i></i>WCAG Compliant</div>
+          <div class="float-tag ft2"><i></i>10+ Yrs Experience</div>
+          <div class="phone">
+            <div class="phone-screen" id="heroPhone">
+              <div class="phone-slide active">
+                <img src="assets/app1-home.png" alt="App interface preview 1" />
+              </div>
+              <div class="phone-slide">
+                <img
+                  src="assets/app2-vitals.png"
+                  alt="App interface preview 2"
+                />
+              </div>
+              <div class="phone-slide">
+                <img src="assets/app3-home.png" alt="App interface preview 3" />
+              </div>
+              <div class="phone-slide">
+                <img
+                  src="assets/app1-details.png"
+                  alt="App interface preview 4"
+                />
+              </div>
+              <div class="phone-slide">
+                <img src="assets/app4-home.jpg" alt="App interface preview 5" />
+              </div>
+              <div class="phone-dots" id="heroDots"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. FULL-BLEED SEAMLESS RUNNING BOTTOM MARQUEE -->
+    <div class="marquee-wrap">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span><i></i>UI / UX Design</span>
+          <span><i></i>Brand Identity</span>
+          <span><i></i>Front‑End Build</span>
+          <span><i></i>Web Design</span>
+          <span><i></i>WCAG Accessible</span>
+          <span><i></i>Wireframing</span>
+          <span><i></i>UI / UX Design</span>
+          <span><i></i>Brand Identity</span>
+          <span><i></i>Front‑End Build</span>
+          <span><i></i>Web Design</span>
+          <span><i></i>WCAG Accessible</span>
+          <span><i></i>Wireframing</span>
+        </div>
+        <div class="marquee-group" aria-hidden="true">
+          <span><i></i>UI / UX Design</span>
+          <span><i></i>Brand Identity</span>
+          <span><i></i>Front‑End Build</span>
+          <span><i></i>Web Design</span>
+          <span><i></i>WCAG Accessible</span>
+          <span><i></i>Wireframing</span>
+          <span><i></i>UI / UX Design</span>
+          <span><i></i>Brand Identity</span>
+          <span><i></i>Front‑End Build</span>
+          <span><i></i>Web Design</span>
+          <span><i></i>WCAG Accessible</span>
+          <span><i></i>Wireframing</span>
+        </div>
+      </div>
+    </div>
+
+    <!-- TIMELINE -->
+    <div class="timeline">
+      <div class="timeline-dotgrid"></div>
+      <div class="wrap timeline-inner">
+        <div class="timeline-line"></div>
+        <div class="timeline-progress" id="tlProgress"></div>
+        <div class="timeline-row">
+          <div class="tl-node">
+            <div class="tl-num">01</div>
+            <b>Research</b>
+          </div>
+          <div class="tl-node">
+            <div class="tl-num">02</div>
+            <b>Wireframe</b>
+          </div>
+          <div class="tl-node">
+            <div class="tl-num">03</div>
+            <b>Visual Design</b>
+          </div>
+          <div class="tl-node">
+            <div class="tl-num">04</div>
+            <b>Front‑End Build</b>
+          </div>
+          <div class="tl-node">
+            <div class="tl-num">05</div>
+            <b>QA &amp; WCAG Test</b>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PRODUCT / APP WORK -->
+    <section id="work">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">Selected Work — 01</p>
+          <h2>Product &amp; App Design</h2>
+          <p>
+            Wireframes, screen UI and front‑end‑ready visual design for mobile
+            apps across healthcare and e‑commerce — click arrows or dots to
+            cycle continuously through screens.
+          </p>
+        </div>
+
+        <!-- CASE 1 -->
+        <div class="case">
+          <div>
+            <span class="case-tag">E‑Commerce · Client Project</span>
+            <h3>E‑Medical Plant App</h3>
+            <p class="desc">
+              A complete shopping journey for a medicinal‑plant marketplace —
+              from language selection and onboarding to browsing, checkout and
+              order tracking.
+            </p>
+            <ul class="case-list">
+              <li>
+                Designed full purchase flow: dashboard, listings, product
+                detail, cart, checkout
+              </li>
+              <li>
+                Built login/onboarding and order‑tracking screens for repeat use
+              </li>
+              <li>
+                Delivered developer‑ready screens in a clean, accessible layout
+              </li>
+            </ul>
+            <div class="chip-row">
+              <span class="chip">Figma</span>
+              <span class="chip">UI Design</span>
+              <span class="chip">E‑Commerce UX</span>
+              <span class="chip">Client Project</span>
+            </div>
+          </div>
+          <div>
+            <div class="carousel">
+              <div class="carousel-header-bar">
+                <span class="eyebrow">App Screens</span>
+                <div class="carousel-controls">
+                  <div class="carousel-arrow" data-prev>‹</div>
+                  <div class="carousel-arrow" data-next>›</div>
+                </div>
+              </div>
+              <div class="carousel-viewport">
+                <div class="carousel-track">
+                  <div class="carousel-slide active">
+                    <img
+                      src="assets/app1-onboard.png"
+                      onclick="openLB(this.src)"
+                      alt="Onboarding screen"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app1-home.png"
+                      onclick="openLB(this.src)"
+                      alt="Home screen"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app1-listing.png"
+                      onclick="openLB(this.src)"
+                      alt="Listing screen"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app1-details.png"
+                      onclick="openLB(this.src)"
+                      alt="Details screen"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app1-checkout.png"
+                      onclick="openLB(this.src)"
+                      alt="Checkout screen"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app1-orders.png"
+                      onclick="openLB(this.src)"
+                      alt="Orders screen"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-dots"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CASE 2 -->
+        <div class="case">
+          <div>
+            <span class="case-tag">Healthcare · Own Product</span>
+            <h3>Healtheoz — Patient Care App</h3>
+            <p class="desc">
+              A patient‑engagement app covering appointments, vitals tracking,
+              doctor profiles and medicine reminders for a healthcare platform.
+            </p>
+            <ul class="case-list">
+              <li>
+                Designed vitals dashboard, appointment booking and
+                doctor‑profile screens
+              </li>
+              <li>
+                Built the medicine‑reminder flow with recurring‑schedule inputs
+              </li>
+              <li>
+                Kept visual language consistent with the wider Healtheoz brand
+                system
+              </li>
+            </ul>
+            <div class="chip-row">
+              <span class="chip">Figma</span>
+              <span class="chip">Healthcare UX</span>
+              <span class="chip">Design System</span>
+            </div>
+          </div>
+          <div>
+            <div class="carousel">
+              <div class="carousel-header-bar">
+                <span class="eyebrow">App Screens</span>
+                <div class="carousel-controls">
+                  <div class="carousel-arrow" data-prev>‹</div>
+                  <div class="carousel-arrow" data-next>›</div>
+                </div>
+              </div>
+              <div class="carousel-viewport">
+                <div class="carousel-track">
+                  <div class="carousel-slide active">
+                    <img
+                      src="assets/app2-home.png"
+                      onclick="openLB(this.src)"
+                      alt="Home screen"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app2-vitals.png"
+                      onclick="openLB(this.src)"
+                      alt="Vitals screen"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app2-appt.png"
+                      onclick="openLB(this.src)"
+                      alt="Appointments screen"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app2-doctor.png"
+                      onclick="openLB(this.src)"
+                      alt="Doctor profile"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app2-reminder.png"
+                      onclick="openLB(this.src)"
+                      alt="Reminders"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-dots"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CASE 3 -->
+        <div class="case">
+          <div>
+            <span class="case-tag">Mental Health · Own Product</span>
+            <h3>Beserene — Wellness Assessment App</h3>
+            <p class="desc">
+              A calm, low‑friction assessment tool that scores stress, anxiety
+              and mood, then routes users into guided therapy tracks.
+            </p>
+            <ul class="case-list">
+              <li>
+                Designed the assessment flow — task video, multiple‑choice, and
+                risk‑score result
+              </li>
+              <li>
+                Built a home dashboard tracking symptoms, vitals and module
+                progress
+              </li>
+              <li>
+                Used a cool, reassuring palette suited to a mental‑wellness
+                context
+              </li>
+            </ul>
+            <div class="chip-row">
+              <span class="chip">Figma</span>
+              <span class="chip">Wellness UX</span>
+              <span class="chip">Data Visualisation</span>
+            </div>
+          </div>
+          <div>
+            <div class="carousel">
+              <div class="carousel-header-bar">
+                <span class="eyebrow">App Screens</span>
+                <div class="carousel-controls">
+                  <div class="carousel-arrow" data-prev>‹</div>
+                  <div class="carousel-arrow" data-next>›</div>
+                </div>
+              </div>
+              <div class="carousel-viewport">
+                <div class="carousel-track">
+                  <div class="carousel-slide active">
+                    <img
+                      src="assets/app3-home.png"
+                      onclick="openLB(this.src)"
+                      alt="Home dashboard"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app3-assess.png"
+                      onclick="openLB(this.src)"
+                      alt="Assessment flow"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app3-video.png"
+                      onclick="openLB(this.src)"
+                      alt="Video module"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app3-result.png"
+                      onclick="openLB(this.src)"
+                      alt="Results screen"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app3-profile.png"
+                      onclick="openLB(this.src)"
+                      alt="User profile"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-dots"></div>
+            </div>
+          </div>
+        </div>
+
+        <!-- CASE 4 -->
+        <div class="case">
+          <div>
+            <span class="case-tag"
+              >EdTech / Mental Health · Full Ecosystem</span
+            >
+            <h3>Aipsychi — App + Website</h3>
+            <p class="desc">
+              An AI‑companion wellness platform for students — designed across
+              both the mobile chatbot app and its marketing website.
+            </p>
+            <ul class="case-list">
+              <li>
+                Designed chatbot, video‑library and mood‑journal screens for the
+                app
+              </li>
+              <li>
+                Designed the public website — mission, modules and platform
+                overview
+              </li>
+              <li>
+                Kept typography, colour and iconography consistent across all
+                touchpoints
+              </li>
+            </ul>
+            <div class="chip-row">
+              <span class="chip">Figma</span>
+              <span class="chip">Web Design</span>
+              <span class="chip">Brand Consistency</span>
+            </div>
+          </div>
+          <div>
+            <div class="carousel">
+              <div class="carousel-header-bar">
+                <span class="eyebrow">App Screens</span>
+                <div class="carousel-controls">
+                  <div class="carousel-arrow" data-prev>‹</div>
+                  <div class="carousel-arrow" data-next>›</div>
+                </div>
+              </div>
+              <div class="carousel-viewport">
+                <div class="carousel-track">
+                  <div class="carousel-slide active">
+                    <img
+                      src="assets/app4-home.jpg"
+                      onclick="openLB(this.src)"
+                      alt="App home"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app4-chat.jpg"
+                      onclick="openLB(this.src)"
+                      alt="AI Chat interface"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app4-library.jpg"
+                      onclick="openLB(this.src)"
+                      alt="Resource library"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app4-player.jpg"
+                      onclick="openLB(this.src)"
+                      alt="Audio player"
+                    />
+                  </div>
+                  <div class="carousel-slide">
+                    <img
+                      src="assets/app4-journal.jpg"
+                      onclick="openLB(this.src)"
+                      alt="Mood journal"
+                    />
+                  </div>
+                </div>
+              </div>
+              <div class="carousel-dots"></div>
+            </div>
+          </div>
+
+          <!-- COMPACT COMPANION SECTION -->
+          <div class="companion-split">
+            <div class="companion-content">
+              <span class="case-tag">Companion Desktop Portal</span>
+              <h4>Aipsychi Marketing &amp; Student Portal</h4>
+              <p>
+                A high-converting desktop portal designed for students and
+                universities with structured audio modules and registration.
+              </p>
+              <div class="chip-row">
+                <span class="chip">Responsive Web</span>
+                <span class="chip">Landing Page</span>
+                <span class="chip">Web UI</span>
+              </div>
+            </div>
+            <div
+              class="companion-img-box"
+              onclick="openLB('assets/web-aipsychi.png')"
+            >
+              <img
+                src="assets/web-aipsychi.png"
+                alt="Aipsychi website desktop layout preview"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- WEB DESIGN SECTION -->
+    <section id="web" class="on-dark">
+      <div class="web-glow"></div>
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">Selected Work — 02</p>
+          <h2>Web &amp; Landing Page Design</h2>
+          <p>
+            Responsive marketing and lead‑gen pages across legal, healthcare,
+            finance, retail, automotive and senior‑living brands.
+          </p>
+        </div>
+        <div class="web-grid">
+          <div class="web-card" onclick="openLB('assets/web-farinlaw.jpg')">
+            <div class="web-thumb">
+              <img src="assets/web-farinlaw.jpg" alt="Farin Law Website" />
+            </div>
+            <div class="web-info">
+              <span class="case-tag">Legal</span>
+              <h4>Farin Law</h4>
+              <p>Personal‑injury case‑evaluation landing page</p>
+            </div>
+          </div>
+          <div class="web-card" onclick="openLB('assets/web-bluedot.jpg')">
+            <div class="web-thumb">
+              <img src="assets/web-bluedot.jpg" alt="BlueDot Cares Website" />
+            </div>
+            <div class="web-info">
+              <span class="case-tag">Healthcare</span>
+              <h4>BlueDot Cares</h4>
+              <p>In‑home senior care assessment page</p>
+            </div>
+          </div>
+          <div class="web-card" onclick="openLB('assets/web-usmoney.jpg')">
+            <div class="web-thumb">
+              <img
+                src="assets/web-usmoney.jpg"
+                alt="U.S. Money Reserve Website"
+              />
+            </div>
+            <div class="web-info">
+              <span class="case-tag">Finance</span>
+              <h4>U.S. Money Reserve</h4>
+              <p>Precious‑metals investor lead‑gen page</p>
+            </div>
+          </div>
+          <div class="web-card" onclick="openLB('assets/web-legendary.jpg')">
+            <div class="web-thumb">
+              <img
+                src="assets/web-legendary.jpg"
+                alt="Legendary Whitetails Website"
+              />
+            </div>
+            <div class="web-info">
+              <span class="case-tag">E‑Commerce</span>
+              <h4>Legendary Whitetails</h4>
+              <p>Outdoor apparel promotional page</p>
+            </div>
+          </div>
+          <div class="web-card" onclick="openLB('assets/web-buddydog.jpg')">
+            <div class="web-thumb">
+              <img
+                src="assets/web-buddydog.jpg"
+                alt="Buddy's Dog Den Website"
+              />
+            </div>
+            <div class="web-info">
+              <span class="case-tag">Pet Care</span>
+              <h4>Buddy's Dog Den</h4>
+              <p>Boarding &amp; daycare offer landing page</p>
+            </div>
+          </div>
+          <div class="web-card" onclick="openLB('assets/web-mitsubishi.jpg')">
+            <div class="web-thumb">
+              <img
+                src="assets/web-mitsubishi.jpg"
+                alt="Mitsubishi Service Website"
+              />
+            </div>
+            <div class="web-info">
+              <span class="case-tag">Automotive</span>
+              <h4>Mitsubishi Service</h4>
+              <p>Dealer service &amp; offers landing page</p>
+            </div>
+          </div>
+          <div class="web-card" onclick="openLB('assets/web-affinity.jpg')">
+            <div class="web-thumb">
+              <img
+                src="assets/web-affinity.jpg"
+                alt="Affinity at Mirabeau Website"
+              />
+            </div>
+            <div class="web-info">
+              <span class="case-tag">Senior Living</span>
+              <h4>Affinity at Mirabeau</h4>
+              <p>Active 62+ community tour‑booking page</p>
+            </div>
+          </div>
+          <div class="web-card" onclick="openLB('assets/web-amazonb2b.jpg')">
+            <div class="web-thumb">
+              <img
+                src="assets/web-amazonb2b.jpg"
+                alt="Amazon Autos Dealer Website"
+              />
+            </div>
+            <div class="web-info">
+              <span class="case-tag">Automotive · Amazon</span>
+              <h4>Amazon Autos — Dealer</h4>
+              <p>Dealer‑partnership signup landing page</p>
+            </div>
+          </div>
+          <div class="web-card" onclick="openLB('assets/web-amazonemail.jpg')">
+            <div class="web-thumb">
+              <img
+                src="assets/web-amazonemail.jpg"
+                alt="Amazon Autos Email Design"
+              />
+            </div>
+            <div class="web-info">
+              <span class="case-tag">Email Design · Amazon</span>
+              <h4>Amazon Autos — Email</h4>
+              <p>Full marketing email with spec &amp; layout</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- GRAPHIC DESIGN SECTION -->
+    <section id="graphic" class="on-dark">
+      <div class="gfx-halo"></div>
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">Selected Work — 03</p>
+          <h2>Graphic &amp; Brand Design</h2>
+          <p>
+            Logos, marketing collateral, publications, and identity assets
+            crafted for print and digital ecosystems.
+          </p>
+        </div>
+
+        <!-- LOGOS SUBSECTION -->
+        <div class="gfx-sub">
+          <div class="gfx-sub-head">
+            <h3>Logo &amp; Brand Identity Marks</h3>
+            <p>
+              Primary marks and visual identities built for multi-platform usage
+              and scalable brand presence.
+            </p>
+          </div>
+          <div class="logo-grid">
+            <div
+              class="logo-tile"
+              onclick="openLB('assets/gfx-healtheoz-logo2.png')"
+            >
+              <div class="logo-tile-img">
+                <img
+                  src="assets/gfx-healtheoz-logo2.png"
+                  alt="Healtheoz Primary Brand Logo"
+                />
+              </div>
+              <div class="logo-tile-cap">Healtheoz Brandmark</div>
+            </div>
+            <div
+              class="logo-tile"
+              onclick="openLB('assets/gfx-ipract-logo.png')"
+            >
+              <div class="logo-tile-img">
+                <img src="assets/gfx-ipract-logo.png" alt="iPract Logo" />
+              </div>
+              <div class="logo-tile-cap">iPract Identity</div>
+            </div>
+            <div class="logo-tile" onclick="openLB('assets/gfx-doc-logo.png')">
+              <div class="logo-tile-img">
+                <img src="assets/gfx-doc-logo.png" alt="Doc Logo" />
+              </div>
+              <div class="logo-tile-cap">Doc Healthcare Mark</div>
+            </div>
+            <div
+              class="logo-tile"
+              onclick="openLB('assets/gfx-innovizant-logo.png')"
+            >
+              <div class="logo-tile-img">
+                <img
+                  src="assets/gfx-innovizant-logo.png"
+                  alt="Innovizant Logo"
+                />
+              </div>
+              <div class="logo-tile-cap">Innovizant Corporate</div>
+            </div>
+            <div
+              class="logo-tile"
+              onclick="openLB('assets/gfx-vedfin-logo.png')"
+            >
+              <div class="logo-tile-img">
+                <img src="assets/gfx-vedfin-logo.png" alt="Vedfin Logo" />
+              </div>
+              <div class="logo-tile-cap">Vedfin Financial</div>
+            </div>
+            <div class="logo-tile" onclick="openLB('assets/gfx-ved-logo.png')">
+              <div class="logo-tile-img">
+                <img src="assets/gfx-ved-logo.png" alt="Ved India Logo" />
+              </div>
+              <div class="logo-tile-cap">Ved India Identity</div>
+            </div>
+            <div
+              class="logo-tile"
+              onclick="openLB('assets/gfx-stayblessed-logo.png')"
+            >
+              <div class="logo-tile-img">
+                <img
+                  src="assets/gfx-stayblessed-logo.png"
+                  alt="Stay Blessed Logo"
+                />
+              </div>
+              <div class="logo-tile-cap">Stay Blessed Apparel</div>
+            </div>
+            <div
+              class="logo-tile"
+              onclick="openLB('assets/gfx-healtheoz-flyer2.png')"
+            >
+              <div class="logo-tile-img">
+                <img
+                  src="assets/gfx-healtheoz-flyer2.png"
+                  alt="Healtheoz Primary Wordmark"
+                />
+              </div>
+              <div class="logo-tile-cap">Healtheoz Wordmark</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- MARKETING FLYERS -->
+        <div class="gfx-sub">
+          <div class="gfx-sub-head">
+            <h3>Campaign Flyers &amp; Marketing Collateral</h3>
+            <p>
+              High-conversion marketing materials designed for digital
+              campaigns, events, and print distribution.
+            </p>
+          </div>
+          <div class="flyer-grid">
+            <div
+              class="flyer-card"
+              onclick="openLB('assets/gfx-aipsychi-flyer.jpg')"
+            >
+              <img
+                src="assets/gfx-aipsychi-flyer.jpg"
+                alt="Aipsychi Campus Flyer"
+              />
+              <div class="flyer-cap">Aipsychi — Campus Campaign</div>
+            </div>
+            <div
+              class="flyer-card"
+              onclick="openLB('assets/gfx-healtheoz-flyer1.png')"
+            >
+              <img
+                src="assets/gfx-healtheoz-flyer1.png"
+                alt="Healtheoz App Benefits Flyer"
+              />
+              <div class="flyer-cap">Healtheoz — App Launch</div>
+            </div>
+            <div
+              class="flyer-card"
+              onclick="openLB('assets/gfx-healtheoz-flyer3.png')"
+            >
+              <img
+                src="assets/gfx-healtheoz-flyer3.png"
+                alt="Healtheoz Brand Poster"
+              />
+              <div class="flyer-cap">Healtheoz — Brand Poster</div>
+            </div>
+            <div
+              class="flyer-card"
+              onclick="openLB('assets/gfx-doyouknow.jpg')"
+            >
+              <img src="assets/gfx-doyouknow.jpg" alt="Hmom Awareness Flyer" />
+              <div class="flyer-cap">Hmom — Awareness Campaign</div>
+            </div>
+            <div
+              class="flyer-card"
+              onclick="openLB('assets/gfx-hmom-package.png')"
+            >
+              <img
+                src="assets/gfx-hmom-package.png"
+                alt="Hmom Pro Pricing Card"
+              />
+              <div class="flyer-cap">Hmom Pro — Package Card</div>
+            </div>
+            <div
+              class="flyer-card"
+              onclick="openLB('assets/gfx-doyouknow2.jpg')"
+            >
+              <img
+                src="assets/gfx-doyouknow2.jpg"
+                alt="Hmom Stats Infographic"
+              />
+              <div class="flyer-cap">Hmom — Stats Infographic</div>
+            </div>
+            <div class="flyer-card" onclick="openLB('assets/gfx-khera.jpg')">
+              <img src="assets/gfx-khera.jpg" alt="Khera Store Ad" />
+              <div class="flyer-cap">Khera — Retail Promo</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- BROCHURE -->
+        <div class="gfx-sub">
+          <div class="gfx-sub-head">
+            <h3>Print &amp; Editorial Layouts</h3>
+            <p>
+              Multi-page product catalog and spec brochure design built for
+              precise print production standards.
+            </p>
+          </div>
+          <div
+            class="brochure-feature"
+            onclick="openLB('assets/gfx-honda-brochure.jpg')"
+          >
+            <img
+              src="assets/gfx-honda-brochure.jpg"
+              alt="Honda CBR125R Specification Brochure"
+            />
+          </div>
+        </div>
+
+        <!-- PACKAGING & STATIONERY -->
+        <div class="gfx-sub">
+          <div class="gfx-sub-head">
+            <h3>Corporate Identity &amp; Packaging</h3>
+            <p>
+              Stationery design, premium business cards, and customized
+              e-commerce physical packaging assets.
+            </p>
+          </div>
+          <div class="card-grid-3">
+            <div
+              class="simple-card"
+              onclick="openLB('assets/gfx-innovizant-card.png')"
+            >
+              <img
+                src="assets/gfx-innovizant-card.png"
+                alt="Innovizant Business Card Design"
+              />
+            </div>
+            <div
+              class="simple-card"
+              onclick="openLB('assets/gfx-healtheoz-card.jpg')"
+            >
+              <img
+                src="assets/gfx-healtheoz-card.jpg"
+                alt="Healtheoz Business Card Design"
+              />
+            </div>
+            <div class="simple-card" onclick="openLB('assets/gfx-jutebag.png')">
+              <img
+                src="assets/gfx-jutebag.png"
+                alt="Eco Packaging & Jute Bag Design"
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ABOUT SECTION -->
+    <section id="about">
+      <div class="wrap">
+        <div class="sec-head">
+          <p class="eyebrow">About Me</p>
+          <h2>A designer who understands business &amp; production.</h2>
+        </div>
+        <div class="about-grid">
+          <div>
+            <p>
+              I'm a Senior Web &amp; Graphic Designer with 10+ years of
+              experience delivering complete visual and interactive
+              systems[cite: 1]. I bridge the gap between creative visual
+              execution and practical technical production[cite: 1].
+            </p>
+            <p>
+              My workflow spans market analysis, wireframing, high-fidelity UI
+              design, and production buildout using HTML5, CSS3, Bootstrap, and
+              JavaScript — ending with thorough cross-device QA and WCAG
+              standards checks[cite: 1].
+            </p>
+            <p>
+              Experienced in distributed remote work environments, utilizing
+              continuous integration tools, design systems management, and
+              project coordination software[cite: 1].
+            </p>
+          </div>
+          <div>
+            <div class="skill-block">
+              <h4>Design Expertise</h4>
+              <div class="chip-row">
+                <span class="chip">Figma</span>
+                <span class="chip">Adobe XD</span>
+                <span class="chip">Photoshop</span>
+                <span class="chip">Illustrator</span>
+                <span class="chip">InDesign</span>
+                <span class="chip">CorelDRAW</span>
+              </div>
+            </div>
+            <div class="skill-block">
+              <h4>Front‑End Development</h4>
+              <div class="chip-row">
+                <span class="chip">HTML5</span>
+                <span class="chip">CSS3</span>
+                <span class="chip">Bootstrap</span>
+                <span class="chip">JavaScript</span>
+                <span class="chip">WordPress</span>
+                <span class="chip">Shopify</span>
+              </div>
+            </div>
+            <div class="skill-block">
+              <h4>Quality &amp; Compliance</h4>
+              <div class="chip-row">
+                <span class="chip">Responsive Layouts</span>
+                <span class="chip">Cross‑browser Testing</span>
+                <span class="chip">WCAG 2.1 Accessibility</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- FOOTER -->
+    <footer id="contact">
+      <div class="wrap">
+        <div class="footer-top">
+          <p class="eyebrow">Get In Touch</p>
+          <h2>Let's build something scalable.</h2>
+          <p>
+            Available for Senior Web &amp; Graphic Designer roles, consulting,
+            or contract opportunities.
+          </p>
+        </div>
+        <div class="contact-row">
+          <div class="contact-item">
+            <span>Email</span>
+            <a href="mailto:yadavshivshankar1995@gmail.com"
+              >yadavshivshankar1995@gmail.com</a
+            >
+          </div>
+          <div class="contact-item">
+            <span>Phone</span>
+            <a href="tel:+918810213772">+91 88 1021 3772</a>
+          </div>
+          <div class="contact-item">
+            <span>Location</span>
+            <a href="#">Bihar, India · Remote / WFH</a>
+          </div>
+          <div class="contact-item">
+            <span>Behance</span>
+            <a href="https://behance.net/yadavshivsa644" target="_blank"
+              >yadavshivsa644</a
+            >
+          </div>
+          <div class="contact-item">
+            <span>LinkedIn</span>
+            <a
+              href="https://linkedin.com/in/shiv-shankar-9220b6b9"
+              target="_blank"
+              >shiv‑shankar</a
+            >
+          </div>
+        </div>
+        <div class="footer-bottom">
+          <span>© 2026 Shiv Shankar Yadav</span>
+          <span>Senior Web &amp; Graphic Designer</span>
+        </div>
+      </div>
+    </footer>
+
+    <!-- LIGHTBOX SYSTEM -->
+    <div class="lightbox" id="lightbox" onclick="closeLB()">
+      <span class="lightbox-close">×</span>
+      <img id="lb-img" src="" alt="Enlarged design view" />
+    </div>
+
+    <!-- SCRIPTS -->
+    <script>
+      /* THEME CONTROLLER (DEFAULTED TO LIGHT PRIMARY) */
+      var root = document.documentElement;
+      var themeBtn = document.getElementById("themeToggle");
+      var themeIcon = document.getElementById("themeIcon");
+      var themeText = document.getElementById("themeText");
+
+      function setTheme(theme) {
+        root.setAttribute("data-theme", theme);
+        localStorage.setItem("portfolio-theme", theme);
+        if (theme === "dark") {
+          themeIcon.textContent = "☀️";
+          themeText.textContent = "Light";
+        } else {
+          themeIcon.textContent = "🌙";
+          themeText.textContent = "Dark";
+        }
+      }
+
+      var savedTheme = localStorage.getItem("portfolio-theme") || "light";
+      setTheme(savedTheme);
+
+      themeBtn.addEventListener("click", function () {
+        var current = root.getAttribute("data-theme");
+        setTheme(current === "dark" ? "light" : "dark");
+      });
+
+      /* LIGHTBOX MODAL */
+      function openLB(src) {
+        document.getElementById("lb-img").src = src;
+        document.getElementById("lightbox").classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+      function closeLB() {
+        document.getElementById("lightbox").classList.remove("open");
+        document.body.style.overflow = "";
+      }
+
+      /* MOBILE NAVIGATION DRAWER */
+      document
+        .getElementById("navToggle")
+        .addEventListener("click", function () {
+          document.getElementById("navDrawer").classList.toggle("open");
+        });
+
+      /* SCROLL PROGRESS TRACKER */
+      window.addEventListener("scroll", function () {
+        var h = document.documentElement;
+        var pct = (h.scrollTop / (h.scrollHeight - h.clientHeight)) * 100;
+        document.getElementById("scrollbar").style.width = (pct || 0) + "%";
+      });
+
+      /* HERO CANVAS ANIMATION EFFECT */
+      (function () {
+        var canvas = document.getElementById("heroCanvas");
+        if (!canvas) return;
+        var ctx = canvas.getContext("2d");
+        var width, height;
+        var particles = [];
+
+        function resize() {
+          width = canvas.width = canvas.parentElement.offsetWidth;
+          height = canvas.height = canvas.parentElement.offsetHeight;
+        }
+        window.addEventListener("resize", resize);
+        resize();
+
+        for (var i = 0; i < 20; i++) {
+          particles.push({
+            x: Math.random() * width,
+            y: Math.random() * height,
+            r: Math.random() * 2 + 1,
+            dx: (Math.random() - 0.5) * 0.35,
+            dy: (Math.random() - 0.5) * 0.35,
+          });
+        }
+
+        function animate() {
+          ctx.clearRect(0, 0, width, height);
+          ctx.fillStyle = "rgba(179, 139, 22, 0.22)";
+          for (var i = 0; i < particles.length; i++) {
+            var p = particles[i];
+            ctx.beginPath();
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2);
+            ctx.fill();
+            p.x += p.dx;
+            p.y += p.dy;
+            if (p.x < 0 || p.x > width) p.dx *= -1;
+            if (p.y < 0 || p.y > height) p.dy *= -1;
+          }
+          requestAnimationFrame(animate);
+        }
+        animate();
+      })();
+
+      /* TIMELINE PROGRESS OBSERVER */
+      try {
+        var tlTarget = document.querySelector(".timeline");
+        if ("IntersectionObserver" in window && tlTarget) {
+          var tlIO = new IntersectionObserver(
+            function (entries) {
+              if (entries[0].isIntersecting) {
+                document.getElementById("tlProgress").style.width = "100%";
+                tlIO.unobserve(entries[0].target);
+              }
+            },
+            { threshold: 0.2 },
+          );
+          tlIO.observe(tlTarget);
+        }
+      } catch (e) {}
+
+      /* HERO PHONE SCREEN ROTATOR */
+      (function () {
+        var slides = document.querySelectorAll("#heroPhone .phone-slide");
+        var dotsWrap = document.getElementById("heroDots");
+        if (!slides.length || !dotsWrap) return;
+        for (var i = 0; i < slides.length; i++) {
+          var d = document.createElement("span");
+          if (i === 0) d.classList.add("active");
+          dotsWrap.appendChild(d);
+        }
+        var dots = dotsWrap.querySelectorAll("span");
+        var idx = 0;
+        setInterval(function () {
+          slides[idx].classList.remove("active");
+          dots[idx].classList.remove("active");
+          idx = (idx + 1) % slides.length;
+          slides[idx].classList.add("active");
+          dots[idx].classList.add("active");
+        }, 2800);
+      })();
+
+      /* UNLIMITED CONTINUOUS LOOP CAROUSEL CONTROLLER */
+      var carousels = document.querySelectorAll(".carousel");
+      carousels.forEach(function (car) {
+        var viewport = car.querySelector(".carousel-viewport");
+        var slides = car.querySelectorAll(".carousel-slide");
+        var dotsWrap = car.querySelector(".carousel-dots");
+        var prevBtn = car.querySelector("[data-prev]");
+        var nextBtn = car.querySelector("[data-next]");
+        var total = slides.length;
+        var index = 0;
+
+        for (var s = 0; s < total; s++) {
+          var dot = document.createElement("span");
+          if (s === 0) dot.classList.add("active");
+          (function (si) {
+            dot.addEventListener("click", function () {
+              goTo(si);
+            });
+          })(s);
+          dotsWrap.appendChild(dot);
+        }
+        var dots = dotsWrap.querySelectorAll("span");
+
+        function getStep() {
+          return slides[1]
+            ? slides[1].offsetLeft - slides[0].offsetLeft
+            : viewport.offsetWidth;
+        }
+
+        function updateUI() {
+          for (var s = 0; s < total; s++) {
+            slides[s].classList.toggle("active", s === index);
+            if (dots[s]) dots[s].classList.toggle("active", s === index);
+          }
+        }
+
+        function goTo(i) {
+          if (i < 0) {
+            index = total - 1;
+          } else if (i >= total) {
+            index = 0;
+          } else {
+            index = i;
+          }
+          viewport.scrollTo({ left: index * getStep(), behavior: "smooth" });
+          updateUI();
+        }
+
+        if (prevBtn) {
+          prevBtn.addEventListener("click", function () {
+            goTo(index - 1);
+          });
+        }
+        if (nextBtn) {
+          nextBtn.addEventListener("click", function () {
+            goTo(index + 1);
+          });
+        }
+
+        var scrollTimer;
+        viewport.addEventListener(
+          "scroll",
+          function () {
+            clearTimeout(scrollTimer);
+            scrollTimer = setTimeout(function () {
+              var step = getStep();
+              if (step > 0) {
+                index = Math.round(viewport.scrollLeft / step);
+                if (index < 0) index = 0;
+                if (index >= total) index = total - 1;
+                updateUI();
+              }
+            }, 60);
+          },
+          { passive: true },
+        );
+      });
+    </script>
+  </body>
+</html>
